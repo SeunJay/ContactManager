@@ -1,15 +1,9 @@
 const mongoose = require("mongoose");
 
 const contactSchema = new mongoose.Schema({
-  firstName: {
+  name: {
     type: String,
     required: true,
-    max: 255,
-    min: 6
-  },
-  lastName: {
-    type: String,
-    required: false,
     max: 255,
     min: 6
   },
