@@ -2,12 +2,7 @@ const joi = require("@hapi/joi");
 
 const contactValidation = data => {
   const schema = {
-    firstName: joi
-      .string()
-      .min(6)
-      .trim()
-      .required(),
-    lastName: joi
+    name: joi
       .string()
       .min(6)
       .trim()
@@ -15,6 +10,7 @@ const contactValidation = data => {
     email: joi
       .string()
       .trim()
+      .min(6)
       .required()
       .email(),
     phone: joi
@@ -26,4 +22,4 @@ const contactValidation = data => {
   return joi.validate(data, schema);
 };
 
-module.exports.contactValidation = contactValidation
+module.exports.contactValidation = contactValidation;
