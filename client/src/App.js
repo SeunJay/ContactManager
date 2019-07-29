@@ -10,7 +10,9 @@ function App() {
     <Router>
       <NavBar branding="Contact Manager" />
       <div className="container">
-        <CreateContact />
+        <Switch>
+          <Route exact path="/contact/create" component={CreateContact}/>
+        </Switch>
       </div>
     </Router>
   );
