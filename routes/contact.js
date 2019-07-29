@@ -76,14 +76,12 @@ router.post("/block/:contactId", async (req, res) => {
   try {
     const contact = await Contact.findById(req.params.contactId);
     contact.isBlocked = true;
-    res
-      .status(200)
-      .json({
-        message: `contact with the id of ${
-          req.params.contactId
-        } blocked successfully`,
-        contact
-      });
+    res.status(200).json({
+      message: `contact with the id of ${
+        req.params.contactId
+      } blocked successfully`,
+      contact
+    });
   } catch (error) {
     res.status(404).json(`Error: ${error}`);
   }
