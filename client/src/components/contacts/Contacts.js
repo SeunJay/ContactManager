@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-//import { Grid, Cell, List, ListItem, ListItemContent } from "react-mdl";
 import AvatarImage from "./img_avatar.png";
+import { Link } from "react-router-dom";
 
 export default function Contacts() {
   const [contacts, setContacts] = useState([]);
   const [contact, setContact] = useState([]);
   const [status, setStatus] = useState(false);
-  
+
   useEffect(() => {
     // console.log(getContacts());
     async function getData() {
@@ -55,11 +55,14 @@ export default function Contacts() {
         </div>
         <ul className="list-group">
           <li className="list-group-item">
-            <i className="fal fa-envelope" />Email: {contact.email}
+            <i className="fal fa-envelope" />
+            Email: {contact.email}
           </li>
           <li className="list-group-item">Phone: {contact.phone}</li>
         </ul>
-        <button className="edit">Edit</button>
+        <Link to={`/edit/${contact._id}`} className="edit">
+          Edit
+        </Link>
       </div>
     );
   }
