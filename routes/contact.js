@@ -36,6 +36,9 @@ router.get("/", async (req, res) => {
 router.get("/:contactId", async (req, res) => {
   try {
     const contact = await Contact.findById(req.params.contactId);
+    if (!contact) {
+      res.status(404).json(`No contact found`);
+    }
     res.status(200).json({ contact });
   } catch (error) {
     res.status(400).json(`Error: ${error}`);
@@ -74,8 +77,9 @@ router.put("/:contactId", async (req, res) => {
 
 router.post("/block/:contactId", async (req, res) => {
   try {
-    const contact = await Contact.findById(req.params.contactId);
-    contact.isBlocked = true;
+    const contact = await Contact.findByIdAndUpdate(req.params.contactId, {
+      isBlocked: true
+    });
     res.status(200).json({
       message: `contact with the id of ${
         req.params.contactId
@@ -84,6 +88,15 @@ router.post("/block/:contactId", async (req, res) => {
     });
   } catch (error) {
     res.status(404).json(`Error: ${error}`);
+  }
+});
+
+router.get("/blocked", async (req, res) => {
+  try {
+    const contacts = await Contact.find({ isBlocked: true });
+    res.status(200).json({ contacts });
+  } catch (error) {
+    res.status(404).json(`${error}`);
   }
 });
 
