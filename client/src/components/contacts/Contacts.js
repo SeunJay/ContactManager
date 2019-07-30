@@ -24,6 +24,7 @@ export default function Contacts() {
   }, []);
 
   const getFirstWord = string => {
+    if (!string) return;
     const regex = /([^\s]+)/;
 
     const word = string
@@ -56,11 +57,15 @@ export default function Contacts() {
         <ul className="list-group">
           <li className="list-group-item">
             <i className="fal fa-envelope" />
+            Email: {contact.name}
+          </li>
+          <li className="list-group-item">
+            <i className="fal fa-envelope" />
             Email: {contact.email}
           </li>
           <li className="list-group-item">Phone: {contact.phone}</li>
         </ul>
-        <Link to={`/edit/${contact._id}`} className="edit">
+        <Link to={`/edit/${contact._id}`} contact={contact} className="edit">
           Edit
         </Link>
       </div>
@@ -75,19 +80,21 @@ export default function Contacts() {
       <div className="flex-container">
         <div className="details-cont column1">
           {contacts.map(contact => {
-            return (
-              <p className="contact-name" key={contact._id}>
-                <span className="contact-span">{contact.name[0]}</span>
-                {getFirstWord(contact.name)}
-                <button
-                  className="view"
-                  onClick={e => handleClick(e)}
-                  data-id={contact._id}
-                >
-                  View
-                </button>
-              </p>
-            );
+            if (contact.name && contact._id) {
+              return (
+                <p className="contact-name" key={contact._id}>
+                  <span className="contact-span">{contact.name[0]}</span>
+                  {getFirstWord(contact.name)}
+                  <button
+                    className="view"
+                    onClick={e => handleClick(e)}
+                    data-id={contact._id}
+                  >
+                    View
+                  </button>
+                </p>
+              );
+            }
           })}
         </div>
         <aside className="aside">{contactDetails}</aside>
