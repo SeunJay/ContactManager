@@ -32,6 +32,15 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/blocked", async (req, res) => {
+  try {
+    const contacts = await Contact.find({ isBlocked: true });
+    res.status(200).json({ contacts });
+  } catch (error) {
+    res.status(404).json(`${error}`);
+  }
+});
+
 //get single contact
 router.get("/:contactId", async (req, res) => {
   try {
@@ -66,7 +75,8 @@ router.put("/:contactId", async (req, res) => {
       req.params.contactId,
       req.body,
       {
-        new: true
+        new: true,
+        runValidators: true
       }
     );
     res.status(200).json({ data: { contact } });
@@ -88,15 +98,6 @@ router.post("/block/:contactId", async (req, res) => {
     });
   } catch (error) {
     res.status(404).json(`Error: ${error}`);
-  }
-});
-
-router.get("/blocked", async (req, res) => {
-  try {
-    const contacts = await Contact.find({ isBlocked: true });
-    res.status(200).json({ contacts });
-  } catch (error) {
-    res.status(404).json(`${error}`);
   }
 });
 
