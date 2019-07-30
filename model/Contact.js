@@ -22,9 +22,6 @@ const contactSchema = new mongoose.Schema({
   isBlocked: {
     type: Boolean,
     default: false
-  },
-  _id: {
-    type: String
   }
 });
 
