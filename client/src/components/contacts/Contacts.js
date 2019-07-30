@@ -56,16 +56,20 @@ export default function Contacts() {
         </div>
         <ul className="list-group">
           <li className="list-group-item">
-            <i className="fal fa-envelope" />
-            Email: {contact.name}
+            <i className="far fa-user" />
+            Name: {contact.name}
           </li>
           <li className="list-group-item">
-            <i className="fal fa-envelope" />
+            <i className="far fa-envelope" />
             Email: {contact.email}
           </li>
           <li className="list-group-item">Phone: {contact.phone}</li>
         </ul>
-        <Link to={`/edit/${contact._id}`} contact={contact} className="edit">
+        <Link
+          to={`/edit/${contact._id}`}
+          contact={contact}
+          className="edit"
+        >
           Edit
         </Link>
       </div>
