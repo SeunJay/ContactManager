@@ -1,10 +1,13 @@
 {
-  "name": "myContact",
+  "name": "contact",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.16.2"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
