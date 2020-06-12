@@ -6,6 +6,8 @@ import Contacts from "./components/contacts/Contacts"
 import CreateContact from "./components/contacts/CreateContact";
 import Edit from "./components/contacts/Edit"
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
           <Route exact path="/contact/create" component={CreateContact} />
           <Route exact path="/edit/:id" component={Edit} />
         </Switch>
+        <ToastContainer autoClose={3000} hideProgressBar />
       </div>
     </Router>
   );

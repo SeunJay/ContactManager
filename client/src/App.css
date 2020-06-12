@@ -3,6 +3,10 @@
   display: flex;
 }
 
+.card-header{
+  text-align: center
+}
+
 /* .row:after {
   content: "";
   display: table;
@@ -18,7 +22,7 @@
 .contact-name {
   position: relative;
   vertical-align: middle;
-  padding: 20px 70px;
+  padding: 20px 100px;
   border: 1px solid #f1f1f1;
   width: 100%;
   border-radius: 5px;
@@ -37,17 +41,27 @@
 }
 
 .edit {
+  margin-top: 10px;
   background: #016fb9;
   padding: 5px;
   color: #fff;
   border: none;
   outline: none;
   cursor: pointer;
-  width: 60px
+  width: 100px;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 3px;
+  text-align: center
+}
+
+.edit:hover {
+  color: #016fb9;
+  background: #fff;
 }
 
 .contact-span {
-  margin-right: 40px;
+  margin-right: 30px;
   background: #838282;
   width: 10px;
   padding: 5px;
@@ -79,6 +93,6 @@
   margin-bottom: 7px
 }
 
-.fa-envelope{
+.fa-envelope, .fa-user, .fa-phone{
   margin-right: 10px
 }

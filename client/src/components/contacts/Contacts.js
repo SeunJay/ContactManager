@@ -63,15 +63,50 @@ export default function Contacts() {
             <i className="far fa-envelope" />
             Email: {contact.email}
           </li>
-          <li className="list-group-item">Phone: {contact.phone}</li>
+          <li className="list-group-item">
+            <i className="fas fa-phone" />
+            Phone: {contact.phone}
+          </li>
         </ul>
         <Link
           to={`/edit/${contact._id}`}
           contact={contact}
-          className="edit"
+          className="edit btn btn-primary btn-black center my-0"
         >
           Edit
         </Link>
+      </div>
+    );
+  }
+
+  let list;
+
+  if (contacts.length === 0) {
+    list = (
+      <div className="spinner-border text-primary" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    );
+  } else {
+    list = (
+      <div className="details-cont column1">
+        {contacts.map(contact => {
+          if (contact.name && contact._id) {
+            return (
+              <p className="contact-name" key={contact._id}>
+                <span className="contact-span">{contact.name[0]}</span>
+                {getFirstWord(contact.name)}
+                <button
+                  className="view btn btn-primary btn-black center my-0"
+                  onClick={e => handleClick(e)}
+                  data-id={contact._id}
+                >
+                  View
+                </button>
+              </p>
+            );
+          }
+        })}
       </div>
     );
   }
@@ -82,25 +117,7 @@ export default function Contacts() {
         <span className="text-danger">Contact</span> List
       </h1>
       <div className="flex-container">
-        <div className="details-cont column1">
-          {contacts.map(contact => {
-            if (contact.name && contact._id) {
-              return (
-                <p className="contact-name" key={contact._id}>
-                  <span className="contact-span">{contact.name[0]}</span>
-                  {getFirstWord(contact.name)}
-                  <button
-                    className="view"
-                    onClick={e => handleClick(e)}
-                    data-id={contact._id}
-                  >
-                    View
-                  </button>
-                </p>
-              );
-            }
-          })}
-        </div>
+        {list}
         <aside className="aside">{contactDetails}</aside>
       </div>
     </React.Fragment>

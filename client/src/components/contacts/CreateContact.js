@@ -1,53 +1,59 @@
 import React, { useState } from "react";
 import TextInputGroup from "../layouts/TextInputGroup";
+import { toast } from "react-toastify";
 import axios from "axios";
 
-export default function CreateContact() {
+export default function CreateContact(props) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: ""
+    phone: "",
   });
 
   const [errors, setErrors] = useState({});
 
-  const onChange = e => {
+  const onChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     const { name, email, phone } = formData;
 
     if (name === "") {
-      setErrors({ errors: { name: "Name is required" } });
+      setErrors({ name: "Name is required" });
     }
 
     if (email === "") {
-      setErrors({ errors: { email: "Email is required" } });
+      setErrors({ email: "Email is required" });
     }
 
     if (phone === "") {
-      setErrors({ errors: { phone: "Phone number is required" } });
+      setErrors({ phone: "Phone number is required" });
     }
 
     const contactObj = {
       name,
       email,
-      phone
+      phone,
     };
 
     axios
       .post("http://localhost:4000/contacts", contactObj)
-      .then(res => console.log(res.data))
-      .catch(error => console.log(error));
+      .then((res) => {
+        if (res) {
+          props.history.push("/");
+          toast.success("Contact created successfully!");
+        }
+      })
+      .catch((error) => console.log(error));
 
     setFormData({
       name: "",
       email: "",
-      phone: ""
+      phone: "",
     });
   };
 
@@ -85,7 +91,7 @@ export default function CreateContact() {
             <input
               type="submit"
               value="Add Contact"
-              className="btn btn-light btn-black center"
+              className="btn btn-primary btn-black center"
             />
           </div>
         </form>
